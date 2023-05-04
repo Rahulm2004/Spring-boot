@@ -1,7 +1,10 @@
 package com.laptopbooking.demo.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class LaptopDetails {
@@ -13,9 +16,33 @@ public class LaptopDetails {
     private String ssd;
     private String ram;
     private String colour;
+    private int price;
+    private int rating; 
+    private String warranty;
+    
+	@OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="features")
+    private Features feature;
+    
     LaptopDetails()
     {}
-    public int getModelid() {
+    
+    public Features getFeature() {
+    	return feature;
+    }
+    
+    public void setFeature(Features feature) {
+    	this.feature = feature;
+    }
+    public String getWarranty() {
+		return warranty;
+	}
+
+	public void setWarranty(String warranty) {
+		this.warranty = warranty;
+	}
+
+	public int getModelid() {
 		return modelid;
 	}
 	public void setModelid(int modelid) {
@@ -69,6 +96,5 @@ public class LaptopDetails {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	private int price;
-    private int rating; 
+	
 }
